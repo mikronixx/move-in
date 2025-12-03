@@ -4,6 +4,10 @@ A **Platform/SRE move-in kit** with dotfiles and Python helpers.
 
 this repository is **actively maintained** and designed for others to copy, adapt, and extend.
 
+## Why?
+
+I reuse this stuff constantly. Putting it in one repo saves me time. Maybe it helps someone else too.
+
 ## Usage 
 
 Clone and copy what you need:
