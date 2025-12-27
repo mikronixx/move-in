@@ -1,4 +1,2 @@
 # install requests if not present
 requests
-pytest 
-requests-mock

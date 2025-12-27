@@ -26,12 +26,11 @@ git clone git@github.com:mkrohn-repo/move-in.git
 - sample git, vim, and bash profiles  
 - **Note:** automation doesn’t auto-rename files — shells are personal. Use what fits.
 
-
 ### [`useful_python`](./useful_python)
 **Platform/SRE toolbox — Python helpers**  
-- **boto3**: reusable for AWS sessions, pagination, and common tasks
-- **requests**: wrappers for handling HTTP requests
-- **requests_v2**: Improved HTTP request wrappers with timeouts, tests, typing and docstrings.
+- **boto3**: helpers for AWS sessions, pagination, and common tasks  
+- **requests**: HTTP request helpers with timeouts, tests, typing, and docstrings  
+- **requests_legacy**: deprecated wrappers retained for reference
 
 ## Roadmap
 - Add bearer token and retry support to HTTP(S) request functions 
