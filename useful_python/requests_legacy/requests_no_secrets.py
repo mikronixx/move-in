@@ -26,6 +26,7 @@ def myuser():
             myquest = user["id"]
     return myquest
 
+
 # to get a count of some "thing"
 
 
@@ -34,7 +35,7 @@ def myposts(myquest):
     myreq1 = requests.get("https://jsonplaceholder.typicode.com/posts")
     myposts = myreq1.json()
     for post in myposts:
-        if myquest == post['userId']:
+        if myquest == post["userId"]:
             post_count += 1
     return post_count
 
