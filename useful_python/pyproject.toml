@@ -1,0 +1,10 @@
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.bandit]
+exclude_dirs = ["tests", "requests_legacy"]
+# B101: assert_used - expected in test code, safe to skip
+skips = ["B101"]
