@@ -10,13 +10,27 @@ I reuse this stuff constantly. Putting it in one repo saves me time. Maybe it he
 
 ## Usage
 
-Clone and copy what you need:
+A virtual environment is strongly recommended before cloning.
+
+Clone into a directory named after your intended branch — this keeps your working tree and branch name in sync.
+
 
 ```bash
-git clone https://github.com/mkrohn-repo/move-in.git
+git clone https://github.com/mkrohn-repo/move-in.git your_dir_name_which_should_be_a_branch_name
 #or
-git clone git@github.com:mkrohn-repo/move-in.git
+git clone git@github.com:mkrohn-repo/move-in.git your_dir_name_which_should_be_a_branch_name
+
+cd your_dir_name_which_should_be_a_branch_name
+
+make install
+
+git checkout -b your_dir_name_which_should_be_a_branch_name_or_something_uniq_like_JIRA_number
+
+#do stuff
+
 ```
+
+
 
 ## What's Inside:
 
