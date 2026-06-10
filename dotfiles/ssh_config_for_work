@@ -10,7 +10,7 @@ Host github.com
     IdentityFile ~/.ssh/id_git
     IdentitiesOnly yes
 
-# this is an old linux academy configuration, that is practically drag and drop 
+# this is an old linux academy configuration, that is practically drag and drop
 Host *.mylabserver.com
     User cloud_user
     IdentityFile ~/.ssh/id_la
@@ -20,4 +20,3 @@ Host *.mylabserver.com
 Host k8s*
   StrictHostKeyChecking no
   UserKnownHostsFile=/dev/null
-

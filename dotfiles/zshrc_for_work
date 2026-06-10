@@ -48,4 +48,3 @@ compinit
 
 # Terraform completion
 #compdef terraform=/opt/homebrew/bin/terraform terraform
-
