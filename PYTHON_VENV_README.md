@@ -48,7 +48,7 @@ brew install pyenv
 
 #or
 
-curl -fsSL https://pyenv.run | bash #reccomended by the maintainer
+curl -fsSL https://pyenv.run | bash #recommended by the maintainer
 
 ```
 
