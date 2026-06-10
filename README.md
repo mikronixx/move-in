@@ -16,11 +16,11 @@ Clone into a directory named after your intended branch — this keeps your work
 
 
 ```bash
-git clone https://github.com/mkrohn-repo/move-in.git your_dir_name_which_should_be_a_branch_name
+git clone https://github.com/mikronixx/move-in.git your_dir_name_which_should_be_a_branch_name_or_something_uniq_like_JIRA_number
 #or
-git clone git@github.com:mkrohn-repo/move-in.git your_dir_name_which_should_be_a_branch_name
+git clone git@github.com:mikronixx/move-in.git your_dir_name_which_should_be_a_branch_name_or_something_uniq_like_JIRA_number
 
-cd your_dir_name_which_should_be_a_branch_name
+cd your_dir_name_which_should_be_a_branch_name_or_something_uniq_like_JIRA_number
 
 make install
 
