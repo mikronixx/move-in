@@ -1,0 +1,8 @@
+# install requirements for tooling
+wheel
+setuptools
+ruff
+pre-commit
+black
+mypy
+pylint
