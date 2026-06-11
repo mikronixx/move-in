@@ -6,25 +6,33 @@
 # aws ec2 describe-instances <args, incl --instance-id> are your friends here
 
 import boto3
-
-# basic boto3 auth using local aws credentials
-
-
-def boto3session():
-    boto3session = boto3.Session(region_name="us-west-2")
-    return boto3session
+import argparse
 
 
-boto3session = boto3session()
+def parse_args():
+    parser = argparse.ArgumentParser(description="List running EC2 instances")
+    parser.add_argument("--profile", help="AWS profile name")
+    parser.add_argument("--region", help="AWS region (required if --profile is set)")
+    args = parser.parse_args()
+    if args.profile and not args.region:
+        parser.error("--region is required when --profile is specified")
+    return args
+
+
+def get_session(region="us-west-2", profile=None):
+    return boto3.Session(region_name=region, profile_name=profile)
+
+
+session = get_session()
 
 # create a client that returns a paginated object, which is giant dictonary
 
 
-def ec2instances(boto3session):
+def ec2instances(session):
     ec2instances = []
     pagination_filters = [{"Name": "instance-state-name", "Values": ["running"]}]
     page = (
-        boto3session.client("ec2")
+        session.client("ec2")
         .get_paginator("describe_instances")
         .paginate(Filters=pagination_filters)
         .build_full_result()
@@ -41,4 +49,7 @@ def ec2instances(boto3session):
     return ec2instances
 
 
-print(ec2instances(boto3session))
+if __name__ == "__main__":
+    args = parse_args()
+    session = get_session(region=args.region or "us-west-2", profile=args.profile)
+    print(ec2instances(session))
