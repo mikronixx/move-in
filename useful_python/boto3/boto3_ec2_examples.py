@@ -10,6 +10,8 @@ import argparse
 import boto3
 import boto3.session
 
+DEFAULT_REGION = "us-west-2"
+
 
 def parse_args() -> argparse.Namespace:
     """
@@ -26,7 +28,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def get_session(
-    region: str = "us-west-2", profile: str | None = None
+    region: str = DEFAULT_REGION, profile: str | None = None
 ) -> boto3.session.Session:
     """
     Create a boto3 session.
@@ -35,7 +37,7 @@ def get_session(
         region: AWS region name. Defaults to us-west-2.
         profile: AWS profile name. Defaults to None (uses default profile).
     """
-    return boto3.Session(region_name=region, profile_name=profile)
+    return boto3.Session(region_name=region or "us-west-2", profile_name=profile)
 
 
 # create a client that returns a paginated object, which is giant dictonary
