@@ -5,11 +5,13 @@
 # boto3 undocumented feature, that is also cool https://github.com/boto/boto3/issues/3001 it may be documented by the time you see this.
 # aws ec2 describe-instances <args, incl --instance-id> are your friends here
 
-import boto3
 import argparse
 
+import boto3
+import boto3.session
 
-def parse_args():
+
+def parse_args() -> argparse.Namespace:
     """
     Parse command line arguments.
 
@@ -25,7 +27,9 @@ def parse_args():
     return args
 
 
-def get_session(region="us-west-2", profile=None):
+def get_session(
+    region: str = "us-west-2", profile: str | None = None
+) -> boto3.session.Session:
     """
     Create a boto3 session.
 
@@ -37,9 +41,7 @@ def get_session(region="us-west-2", profile=None):
 
 
 # create a client that returns a paginated object, which is giant dictonary
-
-
-def ec2instances(session):
+def ec2instances(session: boto3.session.Session) -> list[list[str | None]]:
     """
     Return a list of running EC2 instances.
 
@@ -49,7 +51,7 @@ def ec2instances(session):
     Args:
         session: boto3 Session object.
     """
-    ec2instances = []
+    instances: list[list[str | None]] = []
     pagination_filters = [{"Name": "instance-state-name", "Values": ["running"]}]
     page = (
         session.client("ec2")
@@ -59,14 +61,14 @@ def ec2instances(session):
     )
     for reservation in page["Reservations"]:
         for instance in reservation["Instances"]:
-            ec2instances.append(
+            instances.append(
                 [
                     instance["InstanceId"],
                     instance["PublicIpAddress"],
                     instance["PrivateIpAddress"],
                 ]
             )
-    return ec2instances
+    return instances
 
 
 if __name__ == "__main__":
