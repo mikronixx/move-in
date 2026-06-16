@@ -5,39 +5,10 @@
 # boto3 undocumented feature, that is also cool https://github.com/boto/boto3/issues/3001 it may be documented by the time you see this.
 # aws ec2 describe-instances <args, incl --instance-id> are your friends here
 
-import argparse
-
+from session import get_session, parse_args
 import boto3
-import boto3.session
 
 DEFAULT_REGION = "us-west-2"
-
-
-def parse_args() -> argparse.Namespace:
-    """
-    Parse command line arguments.
-    --profile and --region are mandatory
-    """
-    parser = argparse.ArgumentParser(description="List running EC2 instances")
-    parser.add_argument("--profile", required=True, help="AWS profile name")
-    parser.add_argument(
-        "--region", required=True, help="AWS region (required if --profile is set)"
-    )
-    args = parser.parse_args()
-    return args
-
-
-def get_session(
-    region: str = DEFAULT_REGION, profile: str | None = None
-) -> boto3.session.Session:
-    """
-    Create a boto3 session.
-
-    Args:
-        region: AWS region name. Defaults to us-west-2.
-        profile: AWS profile name. Defaults to None (uses default profile).
-    """
-    return boto3.Session(region_name=region or "us-west-2", profile_name=profile)
 
 
 # create a client that returns a paginated object, which is giant dictonary
