@@ -71,5 +71,5 @@ def ec2instances(session):
 
 if __name__ == "__main__":
     args = parse_args()
-    session = get_session(region=args.region or "us-west-2", profile=args.profile)
+    session = get_session(region=args.region, profile=args.profile)
     print(ec2instances(session))
