@@ -1,3 +1,2 @@
 # install boto3 if not present
 boto3
-argparse
