@@ -14,16 +14,14 @@ import boto3.session
 def parse_args() -> argparse.Namespace:
     """
     Parse command line arguments.
-
-    --profile and --region are optional, but --region is required if --profile is set.
-    If neither is provided, defaults to us-west-2 and the default AWS profile.
+    --profile and --region are mandatory
     """
     parser = argparse.ArgumentParser(description="List running EC2 instances")
-    parser.add_argument("--profile", help="AWS profile name")
-    parser.add_argument("--region", help="AWS region (required if --profile is set)")
+    parser.add_argument("--profile", required=True, help="AWS profile name")
+    parser.add_argument(
+        "--region", required=True, help="AWS region (required if --profile is set)"
+    )
     args = parser.parse_args()
-    if args.profile and not args.region:
-        parser.error("--region is required when --profile is specified")
     return args
 
 
