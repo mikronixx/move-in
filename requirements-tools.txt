@@ -2,7 +2,6 @@
 wheel
 setuptools
 ruff
+bandit
 pre-commit
-black
 mypy
-pylint
