@@ -1,0 +1,12 @@
+wheel
+setuptools
+ruff
+bandit
+pre-commit
+mypy
+awscli
+boto3
+ansible
+ansible-lint
+yamlfix
+ansible
