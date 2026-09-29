@@ -40,8 +40,8 @@ git checkout -b your_dir_name_which_should_be_a_branch_name_or_something_uniq_li
 
 ### [`useful_python`](./useful_python)
 **Platform/SRE toolbox — Python helpers**
-- **boto3**: helpers for AWS sessions, pagination, and common tasks
-- **requests**: HTTP request helpers with timeouts, tests, typing, and docstrings
+- **aws**: helpers for AWS sessions, pagination, and common tasks
+- **http_requests**: HTTP request helpers with timeouts, tests, typing, and docstrings
 - **requests_legacy**: deprecated wrappers retained for reference
 
 ## Roadmap
