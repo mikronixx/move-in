@@ -1,13 +1,13 @@
 # something more useful, with examples of comprehensions and error handling
 # cetainly useful for inclusion in a larger project
+
 import requests
 from requests.exceptions import RequestException
-from typing import List, Dict
 
 API_URL = "https://jsonplaceholder.typicode.com/"
 
 
-def get_users() -> Dict[int, str]:
+def get_users() -> dict[int, str]:
     """
     gets users and return a dictionary {user_id: name}
     """
@@ -22,7 +22,7 @@ def get_users() -> Dict[int, str]:
         return {}
 
 
-def get_posts() -> List[Dict]:
+def get_posts() -> list[dict]:
     """
     gets posts and return the raw list of post dicts
     """
@@ -36,7 +36,7 @@ def get_posts() -> List[Dict]:
         return []
 
 
-def get_post_counts_by_user() -> List[Dict[str, str | int]]:
+def get_post_counts_by_user() -> list[dict[str, str | int]]:
     """
     Return a list of dicts  {'user': 'some name', 'postcount': 100000}
     """
@@ -46,7 +46,7 @@ def get_post_counts_by_user() -> List[Dict[str, str | int]]:
     if not users or not posts:
         return []  # should not happen, but just in case
 
-    counts = {user_id: 0 for user_id in users.keys()}
+    counts = {user_id: 0 for user_id in users}
 
     for post in posts:
         user_id = post.get("userId")
