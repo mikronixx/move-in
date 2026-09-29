@@ -5,8 +5,9 @@
 # boto3 undocumented feature, that is also cool https://github.com/boto/boto3/issues/3001 it may be documented by the time you see this.
 # aws ec2 describe-instances <args, incl --instance-id> are your friends here
 
-from session import get_session, parse_args
 import boto3
+
+from session import get_session, parse_args
 
 DEFAULT_REGION = "us-west-2"
 
