@@ -1,5 +1,4 @@
 ---
-
 name: Python Security Scanner and Linter
 
 on:
@@ -14,6 +13,9 @@ permissions:
 jobs:
   pycheck:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: useful_python
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,19 +24,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+          cache: pip
 
-      - name: Install ruff
-        run: |
-          pip install ruff
-
-      - name: Install bandit
-        run: |
-          pip install bandit
+      - name: Install tools
+        run: pip install "ruff==0.16.8" "bandit==1.9.4"   
 
       - name: Run ruff
-        run: ruff check .
-        working-directory: useful_python
+        run: ruff check . --output-format=github
 
       - name: Run bandit
         run: bandit -r -c pyproject.toml .
-        working-directory: useful_python
