@@ -1,10 +1,19 @@
+# This is Git's per-user configuration file.
+
 [user]
-#	name = your_user
-#	email = your_user@example.com
+#      name = your_user
+#      email = your_user@example.com
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[pull]
+	rebase = false
 [push]
-        autoSetupRemote = true
+	autoSetupRemote = true
+
+[hook "pre-commit-framework"]
+	event = pre-commit
+	command = "[ ! -f .pre-commit-config.yaml ] || pre-commit run"
