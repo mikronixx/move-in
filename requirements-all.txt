@@ -9,4 +9,3 @@ boto3
 ansible
 ansible-lint
 yamlfix
-ansible
