@@ -1,7 +1,7 @@
 # install requirements for tooling
-wheel
-setuptools
-ruff
-bandit
-pre-commit
-mypy
+wheel==0.48.0
+setuptools==84.2.1
+ruff==0.17.3
+bandit==1.9.4
+pre-commit==4.7.0
+mypy==2.4.1
