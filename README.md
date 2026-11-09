@@ -6,6 +6,13 @@ A **Platform/SRE move-in kit** with dotfiles and Python helpers.
 
 I reuse this stuff constantly. Putting it in one repo saves me time. Maybe it helps someone else too.
 
+## Docs
+- [Shift-left security](./SHIFT_LEFT_SECURITY_README.md)
+- [Pre-commit](./PRE_COMMIT_README.md)
+- [Python venv](./PYTHON_VENV_README.md)
+- [AI IDE setup](./AI_IDE_SETUP_README.md)
+
+
 ## Usage
 
 A virtual environment is strongly recommended before cloning.
@@ -27,8 +34,6 @@ git checkout -b your_dir_name_which_should_be_a_branch_name_or_something_uniq_li
 #do stuff
 
 ```
-
-
 
 ## What's Inside:
 
