@@ -2,14 +2,14 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.17.3
     hooks:
-      - id: ruff
+      - id: ruff-check
       - id: ruff-format
   - repo: https://github.com/PyCQA/bandit
     rev: 1.9.4
     hooks:
       - id: bandit
         args: ["-c", "useful_python/pyproject.toml"]
-        files: useful_python/
+        files: ^useful_python/
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -26,7 +26,7 @@ repos:
     rev: v2.4.3
     hooks:
       - id: codespell
-        files: '^(.*\.md|docs/.*\.md)$'
+        files: '\.md$'
         args: ["--ignore-words=.codespellignore"]
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.0
