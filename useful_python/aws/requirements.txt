@@ -1,2 +1,2 @@
 # install boto3 if not present
-boto3
+boto3==1.43.124
