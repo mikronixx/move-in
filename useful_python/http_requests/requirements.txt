@@ -1,4 +1,4 @@
 # install requests if not present
-requests
-pytest
-requests-mock
+requests==2.34.2
+pytest==9.2.0
+requests-mock==1.12.1

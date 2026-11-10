@@ -1,12 +1,12 @@
 wheel==0.48.0
 setuptools==84.2.1
-ruff==0.17.3
+ruff==0.17.4
 bandit==1.9.4
 pre-commit==4.7.0
 mypy==2.4.1
-awscli==1.46.2
-boto3==1.43.124
+awscli==1.46.3
+boto3==1.43.126
 ansible==14.6.0
-ansible-lint==26.10.1
+ansible-lint==26.11.0
 yamlfix==1.19.1
 pip_audit==2.10.1
