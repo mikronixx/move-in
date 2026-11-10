@@ -36,3 +36,9 @@ repos:
     rev: v0.11.0.1-1
     hooks:
       - id: shellcheck
+  - repo: https://github.com/pypa/pip-audit
+    rev: v2.10.0          # check for the latest tag
+    hooks:
+      - id: pip-audit
+        args: ["-r", "requirements-all.txt", "-r", "requirements-tools.txt"]
+        files: ^requirements-.*\.txt$
