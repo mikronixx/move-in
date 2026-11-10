@@ -9,3 +9,4 @@ boto3==1.43.124
 ansible==14.6.0
 ansible-lint==26.10.1
 yamlfix==1.19.1
+pip_audit==2.10.1
