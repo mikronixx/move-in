@@ -14,7 +14,7 @@ This Document will start with using Claude with what appears to be the most comm
 
 ### Step 0 — Get a claude.ai account
 
-Sign up at https://claude.ai. A free account works. A paid subscription gets you more.
+Sign up at https://claude.ai/login. A free account works. A paid subscription gets you more.
 
 A native desktop app is available for macOS and Linux at https://claude.ai/download.
 The desktop app is functionally identical to the browser — same account, same subscription.
