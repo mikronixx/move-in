@@ -22,9 +22,9 @@ flowchart LR
 
 1. [Python venv](./PYTHON_VENV_README.md): you should be comfortable creating Python virtual environments.
 2. In your new venv, install the tools with either:
-   - `make install-tools` from this directory, or
-   - `pip install -r requirements-tools.txt` if you'd rather skip `make` (works from any repo, just point to the file)
-3. [Pre-commit](./PRE_COMMIT_README.md): install the hook so checks run on every `git commit`.
+   - `make install-tools` from this directory (also installs the pre-commit hook), or
+   - `python -m pip install --only-binary :all: -r requirements-tools.txt` if you'd rather skip `make`
+3. If you used pip directly: [install the pre-commit hook](./PRE_COMMIT_README.md) so checks run on every `git commit`.
 
 ## What runs on commit
 
@@ -45,14 +45,48 @@ flowchart LR
 | `gitleaks.yaml` | Scans **git history**, not just staged files. The pre-commit hook only checks staged changes, which don't exist in CI, so this replaces it there. A deleted secret still lives in old commits |
 | SonarQube Cloud | Static analysis for bugs, vulnerabilities, and code smells, with a quality gate on new code |
 
+## SonarQube Cloud
+
+[SonarQube Cloud](https://sonarcloud.io) is static analysis: it reads the code without running it and looks for:
+
+- **Bugs**: code that will likely break at runtime
+- **Vulnerabilities and security hotspots**: injection, weak crypto, hardcoded credentials, risky patterns worth a human look
+- **Code smells**: maintainability problems that make code harder to change
+- **Duplication**: copy-pasted blocks
+
+It also flags issues in the CI setup itself; the pinned SHAs and `--only-binary` in this repo came out of Sonar findings.
+
+### Setup
+
+1. Sign in at [sonarcloud.io](https://sonarcloud.io) with **GitHub**. That creates the account and links your GitHub organization. Free for public repos.
+2. **Analyze new project** → pick the repo → import.
+3. Leave **Automatic Analysis** on. Sonar scans every push and PR itself, with no workflow file or token.
+
+To get test coverage in Sonar later, switch to CI-based analysis: turn off Automatic Analysis, add a `SONAR_TOKEN` repo secret, a `sonar-project.properties` file, and a `sonarqube-scan-action` workflow step.
+
+### Quality gate
+
+Sonar judges **new code** only, not the whole history. A PR fails the gate if the code it adds brings new bugs or vulnerabilities, unreviewed hotspots, or too much duplication. Old issues don't block new work, but nothing new gets worse.
+
+### Where to see results
+
+- **On the PR**: a SonarQube check, plus a summary comment
+- **Dashboard**: [sonarcloud.io](https://sonarcloud.io) → this project → pick the branch or PR
+
+Automatic analysis runs on Sonar's side, so it shows up as a PR check but not in the GitHub **Actions** tab.
+
+### Locally (optional)
+
+The [SonarQube CLI](https://docs.sonarsource.com/sonarqube-cli/) (`brew install sonarqube-cli`) can add a pre-commit hook that blocks secrets before commit (`sonar integrate git --hook pre-commit --local`). This repo already uses gitleaks for that, so it's optional.
+
 ## Supply-chain hardening
 
 The pipeline itself is attack surface, so it's locked down too:
 
 - **Actions pinned to full commit SHAs** (`@<sha> # v4.4.0`). Tags can be moved; commits can't. See the 2025 `tj-actions/changed-files` compromise.
-- **pre-commit pinned to an exact version** and installed with `--only-binary :all:`, so no `setup.py` runs at install time.
 - **Least-privilege tokens**: `permissions: contents: read`, and `persist-credentials: false` so the token isn't left in `.git/config`.
 - **No stored secrets for gitleaks**: it uses GitHub's short-lived, auto-generated `GITHUB_TOKEN`.
+- **Wheel-only installs** (`--only-binary :all:`) in CI and the Makefile, so no `setup.py` runs at install time. pre-commit in CI is also pinned to an exact version.
 
 ## CI caching
 
