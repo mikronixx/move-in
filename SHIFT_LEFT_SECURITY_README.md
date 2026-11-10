@@ -15,6 +15,7 @@ flowchart LR
     C --> D[CI: pre-commit]
     C --> E[CI: gitleaks<br/>full history]
     C --> F[SonarQube Cloud<br/>quality gate]
+    H[Dependabot<br/>alerts + update PRs] -.-> C
     D & E & F --> G[merge to main]
 ```
 
@@ -35,6 +36,7 @@ flowchart LR
 | gitleaks | Block secrets in staged changes before they're ever committed |
 | shellcheck | Catch shell script bugs |
 | codespell | Typos in Markdown (`*.md`) |
+| pip-audit | Check `requirements-*.txt` for known-vulnerable dependencies (only runs when those files change) |
 | pre-commit-hooks | Whitespace, YAML/TOML syntax, merge markers, private keys, large files, shebangs |
 
 ## What runs in CI (GitHub Actions, on PRs and pushes to main)
@@ -79,6 +81,14 @@ Automatic analysis runs on Sonar's side, so it shows up as a PR check but not in
 
 The [SonarQube CLI](https://docs.sonarsource.com/sonarqube-cli/) (`brew install sonarqube-cli`) can add a pre-commit hook that blocks secrets before commit (`sonar integrate git --hook pre-commit --local`). This repo already uses gitleaks for that, so it's optional.
 
+## Dependency scanning (SCA)
+
+Bandit and Sonar check *my* code. SCA checks *other people's* code: the packages, actions, and hooks this repo pulls in.
+
+- **pip-audit** (pre-commit hook): blocks a commit that adds a dependency with a known CVE. Only runs when a `requirements-*.txt` file changes, since it queries a vulnerability database.
+- **Dependabot alerts** (GitHub setting): watches continuously and alerts when a *new* CVE is published against a version already pinned here. Catches what pip-audit can't: code that hasn't changed, but whose dependencies became vulnerable.
+- **Dependabot version updates** (`.github/dependabot.yml`): weekly grouped PRs that bump pip packages, action SHAs (with their `# vX.Y.Z` comments), and pre-commit hook revs. Every update PR runs through the same pre-commit, gitleaks, and Sonar checks before merge.
+
 ## Supply-chain hardening
 
 The pipeline itself is attack surface, so it's locked down too:
@@ -108,3 +118,5 @@ The cache key is made of three parts. If any of them changes, the cache is rebui
 - [Use "pip install" safely](https://www.b-list.org/weblog/2023/dec/07/pip-install-safely/) (James Bennett): why `--only-binary :all:` and exact pins matter
 - [Secure installs](https://pip.pypa.io/en/stable/topics/secure-installs/) (pip docs): pip's own guidance on hardening installs
 - [actions/cache](https://github.com/actions/cache) (GitHub): how cache keys and restores work
+- [pip-audit](https://github.com/pypa/pip-audit) (PyPA): the dependency scanner used in the pre-commit hook
+- [Dependabot now supports pre-commit hooks](https://github.blog/changelog/2026-03-10-dependabot-now-supports-pre-commit-hooks/) (GitHub): how hook revs get kept current
