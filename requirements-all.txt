@@ -5,7 +5,7 @@ bandit==1.9.4
 pre-commit==4.7.0
 mypy==2.4.1
 awscli==1.46.3
-boto3==1.43.126
+boto3==1.44.0
 ansible==14.6.0
 ansible-lint==26.11.0
 yamlfix==1.19.1
