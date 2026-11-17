@@ -1,4 +1,4 @@
-.PHONY: all install-tools install-all
+.PHONY: all install-tools install-all test clean
 
 PIP := python -m pip
 PIP_INSTALL := $(PIP) install --only-binary :all:
@@ -15,3 +15,10 @@ install-all:
 	$(PIP_INSTALL) --upgrade pip
 	$(PIP_INSTALL) -r requirements-all.txt
 	pre-commit install
+
+test:
+	pre-commit run --all-files --show-diff-on-failure
+
+clean:
+	pre-commit clean
+	find . -type d \( -name __pycache__ -o -name .ruff_cache -o -name .pytest_cache \) -
