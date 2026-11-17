@@ -21,4 +21,4 @@ test:
 
 clean:
 	pre-commit clean
-	find . -type d \( -name __pycache__ -o -name .ruff_cache -o -name .pytest_cache \) -
+	find . -type d \( -name __pycache__ -o -name .ruff_cache -o -name .pytest_cache \) -prune -exec rm -rf {} +
