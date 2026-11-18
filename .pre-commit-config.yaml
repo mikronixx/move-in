@@ -43,7 +43,7 @@ repos:
         args: ["-r", "requirements-all.txt", "-r", "requirements-tools.txt"]
         files: ^requirements-.*\.txt$
   - repo: https://github.com/lycheeverse/lychee
-    rev: f10ac2774dac100dfdbf014647487520a8ffe08d  # frozen: nightly
+    rev: 2bba271688c1abb1503097a064e6c3bc1d1b6a9b  # frozen: lychee-v0.24.2
     hooks:
       - id: lychee
         args: ["--no-progress"]
