@@ -7,6 +7,8 @@ updates:
     groups:
       python:
         patterns: ["*"]           # one PR for all pip bumps, not one per package
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "github-actions"
     directory: "/"                # scans .github/workflows/
@@ -15,6 +17,8 @@ updates:
     groups:
       actions:
         patterns: ["*"]
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "pre-commit"
     directory: "/"
@@ -23,3 +27,5 @@ updates:
     groups:
       hooks:
         patterns: ["*"]
+    cooldown:
+      default-days: 7
