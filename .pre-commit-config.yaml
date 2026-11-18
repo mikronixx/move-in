@@ -1,17 +1,17 @@
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.4
+    rev: ef6cf06c079dd6b299dfc720b0f14400c9d168e1  # frozen: v0.17.5
     hooks:
       - id: ruff-check
       - id: ruff-format
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.9.4
+    rev: 92ae8b82fb422a639f0ed8d99e96cea769594e08  # frozen: 1.9.4
     hooks:
       - id: bandit
         args: ["-c", "useful_python/pyproject.toml"]
         files: ^useful_python/
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -23,32 +23,32 @@ repos:
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.4.3
+    rev: 57b21406f092110c18776e39b0bda50d37c945c8  # frozen: v2.4.3
     hooks:
       - id: codespell
         files: '\.md$'
         args: ["--ignore-words=.codespellignore"]
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.30.1
+    rev: 2ca41cc1372d1e939a6a879f18cdc19fc1cac1ce  # frozen: v8.30.0
     hooks:
       - id: gitleaks
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.11.0.1
+    rev: a6564f5d57444e123433a5c9af733e3975c77229  # frozen: v0.11.0.1-1
     hooks:
       - id: shellcheck
   - repo: https://github.com/pypa/pip-audit
-    rev: v2.10.1          # check for the latest tag
+    rev: 8894eb8cee033531a1fbd9f2fb160892531c14e3  # frozen: v2.10.1
     hooks:
       - id: pip-audit
         args: ["-r", "requirements-all.txt", "-r", "requirements-tools.txt"]
         files: ^requirements-.*\.txt$
   - repo: https://github.com/lycheeverse/lychee
-    rev: lychee-v0.24.2
+    rev: f10ac2774dac100dfdbf014647487520a8ffe08d  # frozen: nightly
     hooks:
       - id: lychee
         args: ["--no-progress"]
         files: \.md$
   - repo: https://github.com/mrtazz/checkmake
-    rev: 0.2.2
+    rev: 446732014beed209cff787b0c397a3d9f905424e  # frozen: v0.3.0
     hooks:
       - id: checkmake
