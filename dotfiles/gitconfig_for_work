@@ -13,7 +13,5 @@
 	rebase = false
 [push]
 	autoSetupRemote = true
-
-[hook "pre-commit-framework"]
-	event = pre-commit
-	command = "[ ! -f .pre-commit-config.yaml ] || pre-commit run"
+[init]
+	templateDir = ~/.git-template
