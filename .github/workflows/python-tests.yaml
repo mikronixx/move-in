@@ -32,6 +32,8 @@ jobs:
       - name: Install requirements
         run: 'pip install --require-hashes --only-binary :all: -r requirements.txt'
 
+      - name: Type check
+        run: python -m mypy --config-file=../pyproject.toml .
 
       - name: Run tests
         run: python -m pytest
