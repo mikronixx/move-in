@@ -9,3 +9,6 @@ src = ["aws", "http_requests"]
 exclude_dirs = ["tests", "requests_legacy"]
 # B101: assert_used - expected in test code, safe to skip
 skips = ["B101"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
