@@ -18,7 +18,7 @@ install-tools: install-pre-commit
 install-all: install-tools
 	$(PIP_INSTALL) -r requirements-all.txt
 
-test: install-pre-commit
+test:
 	pre-commit run --all-files --show-diff-on-failure
 
 clean: install-pre-commit
