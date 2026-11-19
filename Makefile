@@ -6,10 +6,16 @@ PIP_INSTALL := $(PIP) install --only-binary :all:
 all:
 	@echo "Please specify either 'make install-tools' or 'make install-all'."
 
-install-tools:
+install-pre-commit:
+	$(PIP_INSTALL) --upgrade pip
+	$(PIP_INSTALL) -r requirements-pre-commit.in
+	pre-commit install
+
+install-tools: install-pre-commit
 	$(PIP_INSTALL) --upgrade pip
 	$(PIP_INSTALL) -r requirements-tools.txt
 	pre-commit install
+
 
 install-all: install-tools
 	$(PIP_INSTALL) -r requirements-all.txt
