@@ -1,3 +1,4 @@
+minimum_pre_commit_version: "4.4.0"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: ef6cf06c079dd6b299dfc720b0f14400c9d168e1  # frozen: v0.17.5
@@ -46,19 +47,6 @@ repos:
     rev: 59931d556f8f5cf4fbacf2c8390a8122ef7a881d  # frozen: v0.3.2
     hooks:
       - id: checkmake
-  - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: 06a39750ec31860bb44f2acf67182c40016cd1e7  # frozen: v1.32.0
-    hooks:
-      - id: zizmor
-  - repo: local
-    hooks:
-      - id: pytest-http-requests
-        name: pytest (http_requests)
-        entry: bash -c 'cd useful_python/http_requests && python -m pytest -q'
-        language: unsupported
-        files: ^useful_python/http_requests/
-        pass_filenames: false
-
   - repo: https://github.com/pypa/pip-audit
     rev: 8894eb8cee033531a1fbd9f2fb160892531c14e3  # frozen: v2.10.1
     hooks:
@@ -75,3 +63,22 @@ repos:
           - "--require-hashes"
           - "--disable-pip"
         files: ^useful_python/http_requests/requirements\.txt$
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: 06a39750ec31860bb44f2acf67182c40016cd1e7  # frozen: v1.32.0
+    hooks:
+      - id: zizmor
+
+  - repo: local
+    hooks:
+      - id: pytest-http-requests
+        name: pytest (http_requests)
+        entry: bash -c 'cd useful_python/http_requests && python -m pytest -q'
+        language: unsupported
+        files: ^useful_python/http_requests/
+        pass_filenames: false
+      - id: mypy-http-requests
+        name: mypy (http_requests)
+        entry: bash -c 'cd useful_python/http_requests && python -m mypy --config-file=../pyproject.toml .'
+        language: unsupported
+        files: ^useful_python/(http_requests/|pyproject\.toml$)
+        pass_filenames: false
