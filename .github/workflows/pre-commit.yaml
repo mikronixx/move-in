@@ -35,4 +35,4 @@ jobs:
       - name: Run hooks
         run: make test
         env:
-          SKIP: gitleaks,lychee
+          SKIP: gitleaks,lychee,pytest-http-requests

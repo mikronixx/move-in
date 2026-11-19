@@ -1,10 +1,12 @@
 # install requirements for tooling
-wheel==0.48.0
-setuptools==84.2.1
-ruff==0.17.4
 bandit==1.9.4
-pre-commit==4.7.0
 mypy==2.4.1
 pip_audit==2.10.1
+pre-commit==4.7.0
+pytest==9.2.0
+requests_mock==1.12.1
+ruff==0.17.4
+setuptools==84.2.1
+wheel==0.48.0
 yamllint==1.38.0
 zizmor==1.32.0
