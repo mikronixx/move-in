@@ -11,10 +11,8 @@ install-tools:
 	$(PIP_INSTALL) -r requirements-tools.txt
 	pre-commit install
 
-install-all:
-	$(PIP_INSTALL) --upgrade pip
+install-all: install-tools
 	$(PIP_INSTALL) -r requirements-all.txt
-	pre-commit install
 
 test:
 	pre-commit run --all-files --show-diff-on-failure
