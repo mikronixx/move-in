@@ -1,3 +1,4 @@
+minimum_pre_commit_version: "4.4.0"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: ef6cf06c079dd6b299dfc720b0f14400c9d168e1  # frozen: v0.17.5
