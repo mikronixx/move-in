@@ -35,7 +35,7 @@ jobs:
           key: pre-commit-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('.pre-commit-config.yaml') }}
 
       - name: Install pre-commit
-        run: 'pip install --only-binary :all: pre-commit==4.7.0'
+        run: 'pip install --require-hashes --only-binary :all: -r requirements-pre-commit.txt'
 
       - name: Run hooks
         run: make test

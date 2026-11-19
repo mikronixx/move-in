@@ -1,0 +1,2 @@
+# required for actions
+pre-commit==4.7.0
