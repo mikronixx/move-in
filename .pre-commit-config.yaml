@@ -53,7 +53,7 @@ repos:
       - id: pip-audit
         name: pip-audit (tools + all)
         args: ["-r", "requirements-tools.txt", "-r", "requirements-all.txt"]
-        files: ^requirements-.*\.txt$
+        files: ^requirements-(tools|all)\.txt$
       - id: pip-audit
         alias: pip-audit-http-requests
         name: pip-audit (http_requests lock)
@@ -63,6 +63,15 @@ repos:
           - "--require-hashes"
           - "--disable-pip"
         files: ^useful_python/http_requests/requirements\.txt$
+      - id: pip-audit
+        alias: pip-audit-pre-commit
+        name: pip-audit (pre-commit lock)
+        args:
+          - "-r"
+          - "requirements-pre-commit.txt"
+          - "--require-hashes"
+          - "--disable-pip"
+        files: ^requirements-pre-commit\.txt$
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: 06a39750ec31860bb44f2acf67182c40016cd1e7  # frozen: v1.32.0
     hooks:
