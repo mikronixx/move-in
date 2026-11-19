@@ -40,7 +40,7 @@ repos:
     rev: 8894eb8cee033531a1fbd9f2fb160892531c14e3  # frozen: v2.10.1
     hooks:
       - id: pip-audit
-        args: ["-r", "requirements-all.txt", "-r", "requirements-tools.txt"]
+        args: ["-r", "requirements-all.txt"]
         files: ^requirements-.*\.txt$
   - repo: https://github.com/lycheeverse/lychee
     rev: 2bba271688c1abb1503097a064e6c3bc1d1b6a9b  # frozen: lychee-v0.24.2
