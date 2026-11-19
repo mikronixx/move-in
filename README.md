@@ -7,10 +7,10 @@ A **Platform/SRE move-in kit** with dotfiles and Python helpers.
 I reuse this stuff constantly. Putting it in one repo saves me time. Maybe it helps someone else too.
 
 ## Docs
-- [Shift-left security](./SHIFT_LEFT_SECURITY_README.md)
-- [Pre-commit](./PRE_COMMIT_README.md)
-- [Python venv](./PYTHON_VENV_README.md)
-- [AI IDE setup](./AI_IDE_SETUP_README.md)
+- [Shift-left security](./docs/SHIFT_LEFT_SECURITY_README.md)
+- [Pre-commit](./docs/PRE_COMMIT_README.md)
+- [Python venv](./docs/PYTHON_VENV_README.md)
+- [AI IDE setup](./docs/AI_IDE_SETUP_README.md)
 
 
 ## Usage
