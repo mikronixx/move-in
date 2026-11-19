@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "pip"
-    directory: "/"                # finds requirements-*.txt in the repo root
+    directories: ["/", "/useful_python/http_requests"] # finds requirements-*.txt in the repo root
     schedule:
       interval: "weekly"
     groups:

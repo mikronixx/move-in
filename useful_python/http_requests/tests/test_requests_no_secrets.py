@@ -1,5 +1,5 @@
 import requests_mock
-from useful_python.requests_v2 import requests_no_secrets as rns
+from http_requests import requests_no_secrets as rns
 
 
 def test_get_users_success():
