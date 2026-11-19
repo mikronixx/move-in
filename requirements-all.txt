@@ -2,4 +2,3 @@ ansible-lint==26.11.0
 ansible==14.6.0
 awscli==1.46.3
 boto3==1.44.1
-yamllint==1.38.0
