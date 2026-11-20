@@ -43,9 +43,19 @@ make install-tools
 
 Use pyenv when you need multiple Python versions across projects.
 
+### build prerequisites (pyenv compiles Python from source)
+
+```bash
+
+xcode-select --install
+brew install openssl readline sqlite3 xz zlib tcl-tk@8 #drop tcl-tk if you have no need for *tkinter*
+
+```
+
 ### Install pyenv
 
 ```bash
+
 brew install pyenv pyenv-virtualenv
 
 #or
@@ -87,6 +97,12 @@ pyenv activate ineedpython
 # Or set it locally per project
 pyenv local ineedpython
 ```
+
+### Troubleshooting
+
+https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+
+
 
 ### Create a named virtualenv
 
