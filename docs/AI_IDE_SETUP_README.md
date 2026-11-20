@@ -1,42 +1,54 @@
-## AI Integration (in progress)
+# AI Integration (in progress)
 
-AI "for those who already know how to write code"
+AI "for those who already know how to write code."
 
-This Document will start with using Claude with what appears to be the most commonly used IDE: VS Code
+This doc starts with Claude in what appears to be the most commonly used IDE: VS Code.
 
-## The Fine Print
+## The fine print
 
- IMPORTANT: claude.ai is free for most tasks. Claude Code in VS Code burns API tokens.
+- **Chat** (claude.ai in the browser, or the desktop app) has a free plan.
+- **Claude Code** (the VS Code extension, terminal, or desktop app) needs a **paid plan**
+  (Pro, Max, Ultra, Team, or Enterprise) **or** a Claude Console account (pay per use with API credits).
+  The free plan doesn't include it.
+- On a paid plan, chat and Claude Code share the same usage limits. No API key needed.
 
- First hit is free. Choose wisely.
+First hit is free. The second one is a subscription. Choose wisely.
 
 ## Using Claude with VS Code
 
-### Step 0 — Get a claude.ai account
+### Step 0: Get an account
 
-Sign up at https://claude.ai/login. A free account works. A paid subscription gets you more.
+Sign up at https://claude.ai. For Claude Code, pick a paid plan: https://claude.com/pricing
 
-A native desktop app is available for macOS and Linux at https://claude.ai/download.
-The desktop app is functionally identical to the browser — same account, same subscription.
+Desktop apps for macOS, Windows, and Linux (beta): https://claude.com/download.
+The desktop app does chat *and* has a Code tab for Claude Code sessions, same account.
 
-### Step 1 — Install the Claude Code extension
+### Step 1: Install the extension
 
-In VS Code: `Command+Shift+X` → search "Claude Code" → install `anthropic.claude-code`
+Requires VS Code 1.94 or later.
 
-### Step 2 — Authenticate
+In VS Code: `Cmd+Shift+X` → search "Claude Code" → install it.
 
-On first use, VS Code will open your browser and ask you to authorize the extension against your Anthropic account. Follow the prompts.
+### Step 2: Sign in
 
-To use Claude Code beyond the free tier, you will need to add API credits at https://console.anthropic.com. Minimum is $5.
+On first use, the extension opens your browser to sign in. Use your claude.ai account
+(paid plan) or your Claude Console account.
 
 ---
 
 ## What to use Claude Code for
 
-Claude Code can read your entire codebase — use it for tasks that require multi-file context:
+Claude Code can read your whole codebase, so use it for work that needs multi-file context:
 
 - Generating tests for existing code
 - Refactoring across files
 - Type hints and docstrings at scale
 
-For single-file tasks (docstrings, quick questions, code review): use either the desktop application or claude.ai in the browser. It is not going to burn tokens.
+For quick, single-file questions (explain this function, review this snippet), plain chat
+in the browser or desktop app is usually enough.
+
+## References
+
+- Use Claude Code in VS Code: https://code.claude.com/docs/en/vs-code
+- Claude Code with Pro, Max, or Ultra: https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan
+- Install Claude Desktop: https://support.claude.com/en/articles/10065433-install-claude-desktop

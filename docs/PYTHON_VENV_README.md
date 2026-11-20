@@ -100,8 +100,8 @@ pyenv local ineedpython
 
 ### Troubleshooting
 
-https://github.com/pyenv/pyenv/wiki#suggested-build-environment
-
+- Build prerequisites: https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+- Build failures: https://github.com/pyenv/pyenv/wiki/Common-build-problems
 
 
 ### Create a named virtualenv
