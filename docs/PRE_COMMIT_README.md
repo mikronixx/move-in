@@ -70,4 +70,5 @@ pre-commit autoupdate --freeze
   If that venv or version is gone, re-run `pre-commit init-templatedir ~/.git-template`
   and `pre-commit install --overwrite` in each repo.
 - **pytest and mypy hooks fail with import errors:** they use your active venv, so
-  activate it first. They're skipped in CI's pre-commit job and run in
+  activate it first. They're skipped in CI's pre-commit job and run in the tests workflow instead.
+- **First run is slow:** each hook builds its own environment once, then it's cached.
