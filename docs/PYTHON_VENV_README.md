@@ -31,20 +31,32 @@ deactivate
 Install dependencies once activated:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-pre-commit.in
 pip install -r requirements-tools.txt
+#or
+make install-tools
 ```
 
 ---
 
-## Option 2: pyenv + venv (recommended)
+## Option 2: pyenv (recommended)
 
 Use pyenv when you need multiple Python versions across projects.
+
+### build prerequisites (pyenv compiles Python from source)
+
+```bash
+
+xcode-select --install
+brew install openssl readline sqlite3 xz zlib tcl-tk@8 #drop tcl-tk if you have no need for *tkinter*
+
+```
 
 ### Install pyenv
 
 ```bash
-brew install pyenv
+
+brew install pyenv pyenv-virtualenv
 
 #or
 
@@ -58,6 +70,7 @@ Add to your shell (`~/.zshrc`):
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 ```
 
 Reload:
@@ -69,20 +82,27 @@ source ~/.zshrc
 ### Install a Python version
 
 ```bash
-pyenv install 3.13.7
-pyenv global 3.13.7
-pyenv virtualenv 3.13.7 ineedpython #alternative install , and add the following aliases to your shell rc file
+pyenv install 3.13.15
+pyenv global 3.13.15
+#or
+pyenv virtualenv 3.13.15 ineedpython #alternative install , and add the following aliases to your shell rc file
 
 alias ineedpython="pyenv activate ineedpython"
 alias idontneedpython="pyenv deactivate ineedpython"
-alias pnuke="pyenv virtualenv-delete  ineedpython && pyenv virtualenv 3.13.7 ineedpython"
+alias pnuke="pyenv virtualenv-delete  ineedpython && pyenv virtualenv 3.13.15 ineedpython"
 
-# Activate,  if you are adverse to aliases
+# Activate,  if you are averse to aliases
 pyenv activate ineedpython
 
 # Or set it locally per project
 pyenv local ineedpython
 ```
+
+### Troubleshooting
+
+https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+
+
 
 ### Create a named virtualenv
 
@@ -104,7 +124,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # Install deps and pre-commit hooks
-make install
+make install-tools
 
 git checkout -b <your_branch_name>
 ```

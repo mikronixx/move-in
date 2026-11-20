@@ -33,3 +33,4 @@ dist/
 env/
 venv/
 .lycheecache
+.python-version
