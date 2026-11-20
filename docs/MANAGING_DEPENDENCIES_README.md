@@ -1,8 +1,7 @@
-#Manage Dependencies
+# Managing Dependencies
 
-Managing module versions, with all either committed to a pinned version, or a pinned version with a hash-locked.
-Why some module versions are are pinned with hash-locked, and others are not
-How Dependabot keeps things current
+How module versions are pinned: some with plain `==` pins, some hash-locked.
+Why the difference, and how Dependabot keeps them current.
 
 ## Prerequisite reading
 
@@ -12,13 +11,13 @@ How Dependabot keeps things current
 
 ## Basic Guidance
 
-**Hash what GitHubAction/CI installs. Plain pins for local tooling.**
+**Hash what GitHub Action(CI) installs. Plain pins for local tooling.**
 
 CI runs unattended on a fresh machine for every PR, so every package it installs
 (including dependencies of dependencies) is locked to an exact version and sha256 hash.
 Local installs on your own machine use plain `==` pins: less ceremony, lower risk.
 
-## The files
+## Files where versions are managed
 
 | Input (you edit) | Lock (generated) | Installed by |
 |---|---|---|
@@ -30,7 +29,7 @@ Local installs on your own machine use plain `==` pins: less ceremony, lower ris
 
 Locally, `make install-pre-commit` installs from the `.in`, not the lock.
 
-## Gotcha: hashes are all-or-nothing
+## Known Issues
 
 If any file in a single `pip install` has hashes, pip requires hashes for **every**
 package in that install. Mixing a lock with a plain file fails.
@@ -46,11 +45,17 @@ For a locked pair: edit the `.in`, then recompile under Python 3.13:
 ```bash
 pip-compile --generate-hashes --strip-extras \
   --output-file=requirements-pre-commit.txt requirements-pre-commit.in
+
+# for http_requests:
+cd useful_python/http_requests
+pip-compile --generate-hashes --strip-extras \
+  --output-file=requirements.txt requirements.in
+
 ```
 
 Never edit a lock by hand. For plain files, just edit the pin.
 
-## Pinned twice on purpose
+## Pinning versions twice on purpose
 
 Some packages appear in more than one file:
 
