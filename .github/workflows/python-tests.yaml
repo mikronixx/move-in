@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dir: [http_requests]        # add aws here once it has tests
+        dir: [http_requests, aws]
     defaults:
       run:
         working-directory: useful_python/${{ matrix.dir }}
