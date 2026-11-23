@@ -47,10 +47,15 @@ SonarQube Cloud adds a quality gate on new code.
 Details: [Shift-left security](./docs/SHIFT_LEFT_SECURITY_README.md).
 
 ## Docs
-- [Shift-left security](./docs/SHIFT_LEFT_SECURITY_README.md): how the checks fit together
-- [Pre-commit](./docs/PRE_COMMIT_README.md): installing the git hook everywhere
-- [Python venv](./docs/PYTHON_VENV_README.md): venv and pyenv setup on a Mac
-- [AI IDE setup](./docs/AI_IDE_SETUP_README.md): Claude Code in VS Code
+
+In [docs](./docs) you fill find the following:
+
+- [Python venv](./docs/PYTHON_VENV_README.md): set up your environment
+- [Pre-commit](./docs/PRE_COMMIT_README.md): Basics of pre-commit.
+- [Shift-left](./docs/SHIFT_LEFT_SECURITY_README.md): local setup, pre-commits, GitHub actions for CI, and how the checks fit together
+- [Managing Dependencies](./docs/MANAGING_DEPENDENCIES_README.md): pins, hashed locks, and how Github Dependabot keeps them current
+- [AI IDE integration](./docs/AI_IDE_SETUP_README.md): AI integration with VS Code
+
 
 ## Roadmap
 - Tests for `aws` (with moto), then add it to CI
