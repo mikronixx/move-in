@@ -36,8 +36,8 @@ def ec2instances(session: boto3.session.Session) -> list[list[str | None]]:
             instances.append(
                 [
                     instance["InstanceId"],
-                    instance["PublicIpAddress"],
-                    instance["PrivateIpAddress"],
+                    instance.get("PublicIpAddress"),
+                    instance.get("PrivateIpAddress"),
                 ]
             )
     return instances

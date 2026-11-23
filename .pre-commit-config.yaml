@@ -94,3 +94,15 @@ repos:
         language: unsupported
         files: ^useful_python/(http_requests/|pyproject\.toml$)
         pass_filenames: false
+      - id: pytest-aws
+        name: pytest (aws)
+        entry: bash -c 'cd useful_python/aws && python -m pytest -q'
+        language: unsupported
+        files: ^useful_python/aws/
+        pass_filenames: false
+      - id: mypy-aws
+        name: mypy (aws)
+        entry: bash -c 'cd useful_python/aws && python -m mypy --config-file=../pyproject.toml .'
+        language: unsupported
+        files: ^useful_python/(aws/|pyproject\.toml$)
+        pass_filenames: false
