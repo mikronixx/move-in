@@ -14,9 +14,11 @@ flowchart LR
     B --> C[git push]
     C --> D[CI: pre-commit]
     C --> E[CI: gitleaks<br/>full history]
+    C --> T[CI: tests<br/>mypy + pytest]
+    C --> L[CI: links<br/>lychee]
     C --> F[SonarQube Cloud<br/>quality gate]
     H[Dependabot<br/>alerts + update PRs] -.-> C
-    D & E & F --> G[merge to main]
+    D & E & T & L & F --> G[merge to main]
 ```
 
 ## Getting Started
@@ -33,18 +35,24 @@ flowchart LR
 |---|---|
 | ruff-check, ruff-format | Lint and format Python consistently |
 | bandit | Flag common Python security issues (`useful_python/`) |
+| mypy, pytest | Type-check and test `http_requests` and `aws` when their files change. They run in your active venv, so install that project's `requirements.txt` first |
 | gitleaks | Block secrets in staged changes before they're ever committed |
+| zizmor | Security-lint GitHub Actions workflows: unpinned actions, injection, over-broad permissions |
 | shellcheck | Catch shell script bugs |
+| checkmake | Lint the `Makefile` |
 | codespell | Typos in Markdown (`*.md`) |
-| pip-audit | Check `requirements-*.txt` for known-vulnerable dependencies (only runs when those files change) |
+| lychee | Broken links in Markdown (settings in `lychee.toml`, shared with CI) |
+| pip-audit | Check each lock file (tools + all, pre-commit, `http_requests`, `aws`) for known-vulnerable dependencies. Each hook only runs when its file changes |
 | pre-commit-hooks | Whitespace, YAML/TOML syntax, merge markers, private keys, large files, shebangs |
 
 ## What runs in CI (GitHub Actions, on PRs and pushes to main)
 
 | Workflow | Why |
 |---|---|
-| `pre-commit.yaml` | Same hooks on every push/PR (except gitleaks, see next row), so nothing depends on someone remembering to install them |
+| `pre-commit.yaml` | Same hooks on every push/PR, so nothing depends on someone remembering to install them. Skips gitleaks, lychee, mypy and pytest, which have their own workflows |
 | `gitleaks.yaml` | Scans **git history**, not just staged files. The pre-commit hook only checks staged changes, which don't exist in CI, so this replaces it there. A deleted secret still lives in old commits |
+| `python-tests.yaml` | One job per project: installs only that project's hashed `requirements.txt`, then runs mypy and pytest |
+| `links.yaml` | lychee on PRs that touch Markdown, plus every Monday to catch links that rot while nothing changes |
 | SonarQube Cloud | Static analysis for bugs, vulnerabilities, and code smells, with a quality gate on new code |
 
 ## SonarQube Cloud
