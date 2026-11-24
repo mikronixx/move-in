@@ -2,13 +2,14 @@
 
 PIP := python -m pip
 PIP_INSTALL := $(PIP) install --only-binary :all:
+PIP_INSTALL_HASHONLY := $(PIP) install --require-hashes --only-binary :all:
 
 all:
 	@echo "Please specify either 'make test, make clean, make install-pre-commit, make install-tools' or 'make install-all'."
 
 install-pre-commit:
 	$(PIP_INSTALL) --upgrade pip
-	$(PIP_INSTALL) -r requirements-pre-commit.in
+	$(PIP_INSTALL_HASHONLY) -r requirements-pre-commit.txt
 	pre-commit install
 
 
