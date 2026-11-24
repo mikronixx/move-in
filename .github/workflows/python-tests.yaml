@@ -35,7 +35,7 @@ jobs:
           python-version: "3.14"
 
       - name: Install requirements
-        run: 'pip install --require-hashes --only-binary :all: -r ci-requirements.txt'
+        run: 'pip install --require-hashes --only-binary :all: -r requirements-ci.txt'
 
       - name: Type check
         run: python -m mypy --config-file=../pyproject.toml .
