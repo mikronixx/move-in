@@ -11,6 +11,7 @@ repos:
       - id: bandit
         args: ["-c", "useful_python/pyproject.toml"]
         files: ^useful_python/
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
     hooks:
@@ -26,30 +27,36 @@ repos:
       - id: file-contents-sorter
         args: [--unique]
         files: ^(\.gitignore|dotfiles/gitignore_for_work)$
+
   - repo: https://github.com/codespell-project/codespell
     rev: 57b21406f092110c18776e39b0bda50d37c945c8  # frozen: v2.4.3
     hooks:
       - id: codespell
         files: '\.md$'
         args: ["--ignore-words=.codespellignore"]
+
   - repo: https://github.com/gitleaks/gitleaks
     rev: 2ca41cc1372d1e939a6a879f18cdc19fc1cac1ce  # frozen: v8.30.0
     hooks:
       - id: gitleaks
+
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: a6564f5d57444e123433a5c9af733e3975c77229  # frozen: v0.11.0.1-1
     hooks:
       - id: shellcheck
+
   - repo: https://github.com/lycheeverse/lychee
     rev: 2bba271688c1abb1503097a064e6c3bc1d1b6a9b  # frozen: lychee-v0.24.2
     hooks:
       - id: lychee
         args: ["--no-progress"]
         files: \.md$
+
   - repo: https://github.com/mrtazz/checkmake
     rev: 446732014beed209cff787b0c397a3d9f905424e  # frozen: v0.3.0
     hooks:
       - id: checkmake
+
   - repo: https://github.com/pypa/pip-audit
     rev: 8894eb8cee033531a1fbd9f2fb160892531c14e3  # frozen: v2.10.1
     hooks:
@@ -75,6 +82,16 @@ repos:
           - "--require-hashes"
           - "--disable-pip"
         files: ^requirements-pre-commit\.txt$
+      - id: pip-audit
+        alias: pip-audit-aws
+        name: pip-audit (aws lock)
+        args:
+          - "-r"
+          - "useful_python/aws/requirements.txt"
+          - "--require-hashes"
+          - "--disable-pip"
+        files: ^useful_python/aws/requirements\.txt$
+
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: c7d31dc612dffdd4d3b2f2b88b9660d3ab057ee8  # frozen: v1.33.1
     hooks:
