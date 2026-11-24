@@ -5,7 +5,7 @@ on:
     paths:
       - "**/*.md"
       - "lychee.toml"
-      - ".github/workflows/links.yml"
+      - ".github/workflows/links.yaml"
   schedule:
     - cron: "17 14 * * 1"     # Mondays: catches links that rot while nothing changes
   workflow_dispatch:
