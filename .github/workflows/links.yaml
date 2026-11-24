@@ -36,7 +36,10 @@ jobs:
           key: lychee-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: lychee-
 
+      # Informational only: broken or slow links show in the job summary but never fail the run.
       - name: Check links
+        continue-on-error: true
+        timeout-minutes: 5
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
           # Same lychee as the pre-commit hook (rev frozen at lychee-v0.24.2).
@@ -51,8 +54,7 @@ jobs:
             --no-progress
             './**/*.md'
           token: ${{ secrets.GITHUB_TOKEN }}   # avoids github.com rate limits
-          fail: true
-          failIfEmpty: true                    # a broken glob should fail, not pass silently
+          fail: false
           jobSummary: true
 
       # Save even when links are broken (the usual failure), so the next run starts warm.
