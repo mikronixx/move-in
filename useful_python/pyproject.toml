@@ -14,7 +14,7 @@ skips = ["B101"]
 pythonpath = ["."]
 
 [tool.mypy]
-python_version = "3.13"
+python_version = "3.14"
 mypy_path = "$MYPY_CONFIG_FILE_DIR"
 check_untyped_defs = true
 warn_redundant_casts = true
