@@ -7,6 +7,8 @@ shift-left CI setup you can lift into other repos.
 
 I reuse this stuff constantly. Putting it in one repo saves me time. Maybe it helps someone else too.
 
+It's also deliberately massive overkill, with more to come as needed, so I never have to figure this out again.
+
 ## Quick start
 
 Create and activate a virtual environment first (see [Python venv](./docs/PYTHON_VENV_README.md)).
@@ -35,29 +37,30 @@ Other targets: `make install-pre-commit` (just the hook), `make clean`.
 - **Note:** nothing is installed automatically. Shells are personal, so use what fits.
 
 ### [`useful_python`](./useful_python)
-- **aws**: helpers for AWS sessions and pagination
+- **aws**:  helpers for AWS sessions and pagination, with tests (moto) and type hints
 - **http_requests**: HTTP helpers with timeouts, tests, and type hints
 - **requests_legacy**: old versions kept for reference (excluded from checks)
 
 ### CI (`.github/`, `.pre-commit-config.yaml`)
-Every commit and PR runs linting, type checks, tests, secret scanning,
-dependency audits, and workflow security checks. Locally via pre-commit,
-and again in GitHub Actions. Dependabot keeps everything current, and
-SonarQube Cloud adds a quality gate on new code.
-Details: [Shift-left security](./docs/SHIFT_LEFT_SECURITY_README.md).
+- Same checks locally (pre-commit) and in CI (GitHub Actions); CI is the gate
+- Every action pinned to a commit SHA; least-privilege tokens; no persisted credentials
+- CI installs from hash-locked requirements; plain pins locally
+- Lint, format, type-check, and test per package, in a matrix
+- Secret scanning on commit and across full git history; dependency audits; workflow security checks (zizmor)
+- Dependabot for pip, Actions, and hooks, with a 7-day cooldown
+- SonarQube Cloud quality gate on new code; signed commits enforced on `main`
+- Details: [Shift-left security](./docs/SHIFT_LEFT_SECURITY_README.md).
 
 ## Docs
 
-In [docs](./docs) you fill find the following:
+In [docs](./docs) you will find the following:
 
 - [Python venv](./docs/PYTHON_VENV_README.md): set up your environment
 - [Pre-commit](./docs/PRE_COMMIT_README.md): Basics of pre-commit.
-- [Shift-left](./docs/SHIFT_LEFT_SECURITY_README.md): local setup, pre-commits, GitHub actions for CI, and how the checks fit together
-- [Managing Dependencies](./docs/MANAGING_DEPENDENCIES_README.md): pins, hashed locks, and how Github Dependabot keeps them current
+- [Shift-left](./docs/SHIFT_LEFT_SECURITY_README.md): local setup, pre-commits, GitHub Actions for CI, and how the checks fit together
+- [Managing Dependencies](./docs/MANAGING_DEPENDENCIES_README.md): pins, hashed locks, and how GitHub Dependabot keeps them current
 - [AI IDE integration](./docs/AI_IDE_SETUP_README.md): AI integration with VS Code
 
-
 ## Roadmap
-- Tests for `aws` (with moto), then add it to CI
 - Bearer token and retry support for the HTTP helpers
 - Expand boto3 session/pagination into a reusable module

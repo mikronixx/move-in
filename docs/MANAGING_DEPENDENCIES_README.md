@@ -11,7 +11,7 @@ Why the difference, and how Dependabot keeps them current.
 
 ## Basic Guidance
 
-**Hash what GitHub Action(CI) installs. Plain pins for local tooling.**
+**Hash what GitHub Actions(CI) installs. Plain pins for local tooling.**
 
 CI runs unattended on a fresh machine for every PR, so every package it installs
 (including dependencies of dependencies) is locked to an exact version and sha256 hash.
@@ -25,7 +25,7 @@ Local installs on your own machine use plain `==` pins: less ceremony, lower ris
 | `useful_python/http_requests/requirements.in` | `useful_python/http_requests/requirements.txt` | CI: `python-tests.yaml` |
 | `requirements-tools.txt` | (plain pins) | `make install-tools` |
 | `requirements-all.txt` | (plain pins) | `make install-all` |
-| `useful_python/aws/requirements.txt` | (plain pins) | nothing yet; gets a lock when `aws` joins CI |
+| `useful_python/aws/requirements.in` | `useful_python/aws/requirements.txt` | CI: `python-tests.yaml`|
 
 Locally, `make install-pre-commit` installs from the `.in`, not the lock.
 
@@ -60,7 +60,7 @@ Never edit a lock by hand. For plain files, just edit the pin.
 Some packages appear in more than one file:
 
 - `pytest`, `requests_mock`, `mypy`: in `requirements-tools.txt` and `http_requests/requirements.in`
-- `boto3`: in `requirements-all.txt` and `aws/requirements.txt`
+- `boto3`: in `requirements-all.txt` and `aws/requirements.in`
 
 Each folder in `useful_python/` carries its own requirements so it can be copied and
 used on its own. Dependabot groups pip bumps across directories, so the copies
