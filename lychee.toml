@@ -1,0 +1,18 @@
+# Shared by CI (links.yml) and the local pre-commit hook.
+
+timeout = 10            # seconds per request
+max_retries = 2
+retry_wait_time = 2     # seconds
+max_concurrency = 32
+
+# 429 = rate-limited: the link exists, the host just throttled us.
+accept = ["200..=299", "429"]
+
+# Hosts that block bots or always time out. Add to this as they show up.
+exclude = [
+  '^https?://(www\.)?linkedin\.com/',
+  '^https?://localhost',
+  '^https?://127\.0\.0\.1',
+]
+
+exclude_path = [".lycheecache"]

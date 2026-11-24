@@ -2,7 +2,10 @@ name: Links
 
 on:
   pull_request:
-    paths: ["**/*.md"]
+    paths:
+      - "**/*.md"
+      - "lychee.toml"
+      - ".github/workflows/links.yml"
   schedule:
     - cron: "17 14 * * 1"     # Mondays: catches links that rot while nothing changes
   workflow_dispatch:
@@ -24,22 +27,38 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up Python
-        id: setup-python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+      # Restore the newest cache from this branch or the base branch.
+      # The key is unique per run, so the save step below never collides with an existing key.
+      - name: Restore lychee cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          python-version: "3.14"
-
-      - name: Cache pre-commit environments
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/pre-commit
-          key: pre-commit-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('.pre-commit-config.yaml') }}
-
-      - name: Install pre-commit
-        run: 'pip install --require-hashes --only-binary :all: -r requirements-pre-commit.txt'
+          path: .lycheecache
+          key: lychee-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: lychee-
 
       - name: Check links
-        run: pre-commit run lychee --all-files
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # lychee uses it to avoid github.com rate limits
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          # Same lychee as the pre-commit hook (rev frozen at lychee-v0.24.2).
+          lycheeVersion: v0.24.2
+          # Options (timeout, retries, excludes, accepted codes) live in lychee.toml,
+          # shared with the pre-commit hook. --root-dir resolves root-relative links like /docs/x.md.
+          args: >-
+            --config lychee.toml
+            --root-dir "$(pwd)"
+            --cache
+            --max-cache-age 1d
+            --no-progress
+            './**/*.md'
+          token: ${{ secrets.GITHUB_TOKEN }}   # avoids github.com rate limits
+          fail: true
+          failIfEmpty: true                    # a broken glob should fail, not pass silently
+          jobSummary: true
+
+      # Save even when links are broken (the usual failure), so the next run starts warm.
+      - name: Save lychee cache
+        if: ${{ !cancelled() }}
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .lycheecache
+          key: lychee-${{ github.run_id }}-${{ github.run_attempt }}
