@@ -11,10 +11,9 @@ install-pre-commit:
 	$(PIP_INSTALL) -r requirements-pre-commit.in
 	pre-commit install
 
+
 install-tools: install-pre-commit
 	$(PIP_INSTALL) -r requirements-tools.txt
-	$(PIP_INSTALL) -r useful_python/aws/requirements.in
-	$(PIP_INSTALL) -r useful_python/http_requests/requirements.in
 
 
 install-all: install-tools
